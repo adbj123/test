@@ -1,9 +1,9 @@
 <?php
     namespace app\admin\controller;
-    use think\Controller;
+ //   use think\Controller;
     use app\admin\model\User;
 
-    class UserController extends Controller{
+    class UserController extends CommonController{
         //添加用户
         public function add(){
     /**
@@ -48,6 +48,29 @@
         }
         //编辑用户
         public function upd(){
+            if(request()->isPost()){
+                $postData = input('post.');
+                //$postData['password']=trim($postData['password']);
+                //halt($postData);
+                //当密码和确认密码又一个不为空就需要验证
+                if($postData['password'] !='' || $postData['repassword'] !='') {
+                    //说明用户需要更新密码
+                    $result = $this->validate($postData, 'User.upd', [], true);
+                    if ($result !== true) {
+                        $this->error(implode(',', $result));
+                    }
+
+                }else{
+                    $this->error("你没有做任何修改");
+                }
+                //写入数据库
+                $userModel = new User();
+                if($userModel->allowField(true)->isUpdate()->save($postData)){
+                    $this->success("编辑成功",url("/admin/user/index"));
+                }else{
+                    $this->error("编辑失败");
+                }
+            }
             $user_id = input('user_id');
             //获取数据进行回显
             $userModel = new User();

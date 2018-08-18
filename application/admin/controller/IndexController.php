@@ -1,7 +1,7 @@
 <?php
     namespace app\admin\controller;
-    use think\Controller;
-    class IndexController extends Controller{
+//    use think\Controller;
+    class IndexController extends CommonController{
         public function index(){
             return $this->fetch();
         }

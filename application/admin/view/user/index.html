@@ -70,7 +70,7 @@
                     <td>{$v['username']}</td>
                     <td>{$v['create_time']}</td>
                     <td>{$v['update_time']}</td>
-                    <td><a href="{:url('/admin/user/upd',['user_id'=>$v['user_id']])}" class="tablelink">查看</a> <a href="{:url('/admin/user/del',['user_id'=>$v['user_id']])}" onclick="return confirm('确认删除？')" class="tablelink"> 删除</a></td>
+                    <td><a href="{:url('/admin/user/upd',['user_id'=>$v['user_id']])}" class="tablelink">修改</a> <a href="{:url('/admin/user/del',['user_id'=>$v['user_id']])}" onclick="return confirm('确认删除？')" class="tablelink"> 删除</a></td>
                 </tr>
                 {/foreach}
             </tbody>

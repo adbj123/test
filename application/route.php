@@ -25,5 +25,9 @@ Route::group('admin',function (){    //后台首页相关路由
     Route::any('/user/add','admin/user/add');
     Route::any('/user/del','admin/user/del');
     Route::any('/user/upd','admin/user/upd');
+    //后台用户登录路由
+    Route::any('/public/login','admin/public/login');
+    //后台权限管理模块
+    Route::any('/auth/add','admin/auth/add');
 });
 ?>

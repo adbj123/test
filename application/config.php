@@ -13,6 +13,21 @@ return [
     // +----------------------------------------------------------------------
     // | 应用设置
     // +----------------------------------------------------------------------
+    // 验证码配置
+    'captcha' => [
+        'codeSet'  => '123456789',
+        'fontSize' => 15,
+        // 验证码字体大小(px)
+        'useCurve' => false,
+        // 是否画混淆曲线
+        'useNoise' => false,
+        // 是否添加杂点
+        'imageH'   => 50,
+        // 验证码图片高度
+        'imageW'   => 160,
+        // 验证码图片宽度
+        'length'   => 4,
+    ],
     //配置静态资源路径
     'static_admin'          =>'/static/admin',
     'static_home'           =>'/static/home',
@@ -45,7 +60,7 @@ return [
     // 是否开启多语言
     'lang_switch_on'         => false,
     // 默认全局过滤方法 用逗号分隔多个
-    'default_filter'         => '',
+    'default_filter'         => 'trim',//默认为''
     // 默认语言
     'default_lang'           => 'zh-cn',
     // 应用类库后缀
