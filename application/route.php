@@ -29,5 +29,11 @@ Route::group('admin',function (){    //后台首页相关路由
     Route::any('/public/login','admin/public/login');
     //后台权限管理模块
     Route::any('/auth/add','admin/auth/add');
+    Route::any('/auth/index','admin/auth/index');
+    Route::any('/auth/upd','admin/auth/upd');
+    //后台角色管理
+    Route::any('/role/upd','admin/role/upd');
+    Route::any('/role/add','admin/role/add');
+    Route::any('/role/index','admin/role/index');
 });
 ?>
