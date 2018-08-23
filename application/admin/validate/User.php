@@ -24,7 +24,7 @@
         protected $scene = [
             'add'=>['username','password','repassword'],
             'upd'=>['username','password','repassword'],
-            'login'=>['username'=>'require','password','captcha'],
+            'login'=>['username'=>'require','password'],
         ];
     }
 ?>

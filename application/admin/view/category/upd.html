@@ -18,7 +18,7 @@
         <span>位置：</span>
         <ul class="placeul">
             <li><a href="#">首页</a></li>
-            <li><a href="#">表单</a></li>
+            <li><a href="#">权限设置</a></li>
         </ul>
     </div>
     <div class="formbody">
@@ -27,42 +27,40 @@
 
         </div>
         <form action="" method="post">
-
+            <input type="hidden" name="cat_id" value="{$catData['cat_id']}">
             <ul class="forminfo">
                 <li>
-                    <label>用户名</label>
-                    <input name="username" placeholder="请输入用户名" type="text" class="dfinput" /><i></i>
+                    <label>分类名称名称</label>
+                    <input name="cat_name" placeholder="请输入权限名称" type="text" class="dfinput" value="{$catData['cat_name']}"/><i></i>
                 </li>
                 <li>
-                    <label >选择角色</label>
-                    <select name="role_id" class="dfinput">
-                    {foreach name='roles' item='v'}
-                        <option value="{$v['role_id']}">{$v['role_name']}</option>
-                    {/foreach}
+                    <label>父分类</label>
+                    <select name="pid" class="dfinput">
+                        <option value="">请选择父类</option>
+                        <option value="0">顶级权限</option>
+                        {foreach name='cats' item='v'}
+                            <option value="{$v['cat_id']}">{:str_repeat('--- ',$v['level'])}{$v['cat_name']}</option>
+                        {/foreach}
                     </select>
                 </li>
                 <li>
-                    <label>密码</label>
-                    <input name="password" placeholder="请输入密码" type="text" class="dfinput" /><i></i>
-                </li>
-                <li>
-                    <label>确认密码</label>
-                    <input name="repassword" placeholder="请输入确认密码" type="text" class="dfinput" />
+                    <label>导航栏</label>
+                    <input type="radio" name="is_show" value="0">不显示
+                    <input type="radio" name="is_show" value="1">显示
                 </li>
 			<li>
-                    <label>&nbsp;</label>
+                    <label></label>
                     <input name="" id="btnSubmit" type="submit" class="btn" value="确认添加" />
              </li>
+            </ul>
         </form>
     </div>
 </body>
 <script>
-    $(".formtitle span").click(function(event){
-        $(this).addClass('active').siblings("span").removeClass('active') ;
-        var index = $(this).index();
-        $("ul.forminfo").eq(index).show().siblings(".forminfo").hide();
-    });
-     $(".formtitle span").eq(0).click();
+
+    var is_show = "{$catData['is_show']}";
+    $("select[name='pid']").val("{$catData['pid']}");
+    $("input[name='is_show'][value="+is_show+"]").attr('checked',true);
 </script>
 
 </html>

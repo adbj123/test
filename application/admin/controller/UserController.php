@@ -2,6 +2,8 @@
     namespace app\admin\controller;
  //   use think\Controller;
     use app\admin\model\User;
+    use app\admin\model\Role;
+
 
     class UserController extends CommonController{
         //添加用户
@@ -14,19 +16,21 @@
      */
         if(request()->isPost()){
             $postData = input('post.');
+            //halt($postData);
             $result = $this->validate($postData,'User.add',[],true);
             if($result !== true){
                 $this->error(implode(',',$result));
             }
             $userModel = new User();
-            //$postData['password'] = md5($postData['password'] . config('password_salt'));
+
             if($userModel->allowField(true)->save($postData)){
                 $this->success("添加成功",url("/admin/user/index"));
             }else{
                 $this->error("添加失败");
             }
         }
-        return $this->fetch('');
+        $roles = Role::select();
+        return $this->fetch('',['roles'=>$roles]);
 }
         //用户列表页
         public function index(){
@@ -50,9 +54,6 @@
         public function upd(){
             if(request()->isPost()){
                 $postData = input('post.');
-                //$postData['password']=trim($postData['password']);
-                //halt($postData);
-                //当密码和确认密码又一个不为空就需要验证
                 if($postData['password'] !='' || $postData['repassword'] !='') {
                     //说明用户需要更新密码
                     $result = $this->validate($postData, 'User.upd', [], true);

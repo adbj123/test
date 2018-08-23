@@ -16,7 +16,6 @@
                     $this->error(implode(',',$result));
                 }
                 $authModel = new Auth();
-
                 if($authModel->save($postData)){
                     $this->success("添加成功",url("/admin/auth/index"));
                 }else{

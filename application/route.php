@@ -35,5 +35,24 @@ Route::group('admin',function (){    //后台首页相关路由
     Route::any('/role/upd','admin/role/upd');
     Route::any('/role/add','admin/role/add');
     Route::any('/role/index','admin/role/index');
+    Route::any('/role/del','admin/role/del');
+    //后台商品类型管理
+    Route::any('/type/upd','admin/type/upd');
+    Route::any('/type/add','admin/type/add');
+    Route::any('/type/index','admin/type/index');
+    Route::any('/type/del','admin/type/del');
+    //后台商品分类管理
+    Route::any('/category/upd','admin/category/upd');
+    Route::any('/category/add','admin/category/add');
+    Route::any('/category/index','admin/category/index');
+    Route::any('/category/del','admin/category/del');
+    //后台商品属性管理
+    Route::any('/Attribute/upd','admin/Attribute/upd');
+    Route::any('/Attribute/add','admin/Attribute/add');
+    Route::any('/Attribute/index','admin/Attribute/index');
+    Route::any('/Attribute/del','admin/Attribute/del');
+    //商品有关的相关路由
+    Route::any('/category/del','admin/category/del');
+    Route::any('/Goods/add','admin/Goods/add');
 });
 ?>
