@@ -49,5 +49,14 @@ class TypeController extends CommonController
         $typeData = $typeModel->find($type_id);
         return $this->fetch('',['typeData'=>$typeData]);
     }
+    public function del(){
+        $type_id = input('type_id');
+        if(Type::destroy($type_id)){
+            $this->success('删除成功',url('/admin/type/index'));
+        }else{
+            $this->error('删除失败');
+        }
+
+    }
 }
 ?>

@@ -55,5 +55,14 @@ class CategoryController extends CommonController
         //halt($catData);
         return $this->fetch('',['cats'=>$cats,'catData'=>$catData]);
     }
+    public function del(){
+        $category_id = input('category_id');
+        if(Category::destroy($category_id)){
+            $this->success('删除成功',url('/admin/category/index'));
+        }else{
+            $this->error('删除失败');
+        }
+
+    }
 }
 ?>

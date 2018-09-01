@@ -1,6 +1,7 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\Attribute;
+use app\admin\model\Category;
 use app\admin\model\Type;
 
 class AttributeController extends CommonController
@@ -70,6 +71,15 @@ class AttributeController extends CommonController
             ['types'=>$types,
             'attrData'=>$attrData]
         );
+    }
+    public function del(){
+        $attr_id = input('attr_id');
+        if(Attribute::destroy($attr_id)){
+            $this->success('删除成功',url('/admin/attribute/index'));
+        }else{
+            $this->error('删除失败');
+        }
+
     }
 }
     ?>

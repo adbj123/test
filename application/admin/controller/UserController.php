@@ -4,7 +4,6 @@
     use app\admin\model\User;
     use app\admin\model\Role;
 
-
     class UserController extends CommonController{
         //添加用户
         public function add(){

@@ -52,7 +52,7 @@ class RoleController extends CommonController
     public function index(){
         $sql = "select t1.*,group_concat(t2.auth_name) as all_auth from sh_role t1 left join sh_auth t2 on find_in_set(t2.auth_id,t1.auth_ids_list) group by t1.role_id";
         $rolesData = Db::query($sql);
-        //halt($rolesData);
+//        halt($rolesData);
         return $this->fetch('',['rolesData'=>$rolesData]);
     }
     public function upd(){

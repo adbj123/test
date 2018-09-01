@@ -19,9 +19,9 @@
                     return;
                 }
                 //非超级
-//                if(!in_array($now_ca,$visitor)){
-//                    $this->redirect('/admin/index/index');
- //               }
+                if(!in_array($now_ca,$visitor)){
+                    $this->redirect('/admin/index/index');
+               }
             }
         }
     }

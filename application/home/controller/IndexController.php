@@ -1,9 +1,9 @@
 <?php
     namespace app\home\controller;
-    use think\Controller;
-    class IndexController extends Controller{
+
+    class IndexController extends CommonController{
         public function index(){
-            return $this->fetch();
+            return $this->fetch('');
         }
     }
 ?>

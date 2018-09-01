@@ -95,10 +95,12 @@
                     {foreach name='types' item='v'}
                     <option value="{$v['type_id']}">{$v['type_name']}</option>
                     {/foreach}
-                    <!--存储动态生成属性的容器-->
-                    <li id = "attrContainer"></li>
+
                 </select>
+                <!--存储动态生成属性的容器-->
+                <li id = "attrContainer"></li>
             </li>
+
         </ul>
         <!--_____________________多图片上传_________________________-->
         <ul class="forminfo">
@@ -121,6 +123,70 @@
 </div>
 </body>
 <script>
+    //切换类型属性，发送ajax,动态生成属性结构
+    $("select[name='type_id']").change(function () {
+        //获取当前切换的类型ID
+        var type_id = $(this).val();
+        //发送ajax,获取类型对应的所有属性
+        var html = '';
+        $.get("{:url('admin/goods/getTypeAttr')}",{"type_id":type_id},function (res) {
+            console.log(res);
+            html +="<ul>";
+            //循环拼接li
+            for(var i=0;i<res.length;i++){
+                html +="<li>";
+                //1.拼接[+]（单选属性attr_type=1）
+                if(res[i].attr_type ==1){
+                   html +="<a href='javascript:;' onclick='cloneAttr(this)'>[+]</a>";
+                }
+                //2.拼接属性的名称
+                html +=res[i].attr_name+"&nbsp;&nbsp;";
+                //判断是否是单选属性，name后面需要加[],唯一属性则不需要
+                var harManyValue = res[i].attr_type == 1 ? '[]' : '';
+                //3.判断属性值的录入方式
+                if(res[i].attr_input_type == 0){
+                    //手工输入
+                    html +="<input type='text' class='dfinput' name='goodsAttrValue["+  res[i].attr_id+"]"+harManyValue+"' placeholder='属性值'>";
+                }else{
+                    //列表选择==〉select
+                    var attr_values = res[i].attr_values;
+                    var arr_values = attr_values.split('|');
+                    html += "<select class='dfinput' name='goodsAttrValue["+res[i].attr_id+"]"+harManyValue+"'>";
+                    html +="<option value=''>请选择</option>";
+                    for(var j=0;j<arr_values.length;j++){
+                        html +="<option value='"+arr_values[j]+"'>"+arr_values[j]+"</option>";
+                    }
+                    html += "</select>";
+                }
+                if(res[i].attr_type==1){
+                    html += "&nbsp;&nbsp;属性价格：<input style='width:100px' name='goodsAttrPrice["+res[i].attr_id+"][]' placeholder='价格' type='text' class='dfinput' />";
+                }
+                html +="</li>";
+            }
+
+            html +="</ul>";
+            //把拼接好的ul赋值给id=attrContainer
+            $("#attrContainer").html(html);
+
+        },'json');
+    });
+    //克隆单选属性的事件
+    function cloneAttr(ele) {
+        //获取a标签的内容
+        var text = $(ele).html();
+        if(text == '[+]'){
+            //克隆当前元素父元素
+            var newLi = $(ele).parent().clone();
+            //把内部的[+]改为[-]
+            newLi.children('a').html('[ - ]');
+            newLi.children('input').val('');
+            //把克隆后的newLi元素放置到当前元素的父元素后面
+            $(ele).parent().after(newLi);
+        }else{
+            //[-]移除当前父元素
+            $(ele).parent().remove();
+        }
+    }
     //克隆图片的事件
     function cloneImg(ele) {
         //获取a标签的内容
@@ -130,6 +196,7 @@
             var newLi = $(ele).parent().clone();
             //把内部的[+]改为[-]
             newLi.children('a').html('[ - ]');
+            newLi.children('input').val('');
             //把克隆后的newLi元素放置到当前元素的父元素后面
             $(ele).parent().after(newLi);
         }else{

@@ -74,6 +74,7 @@
     //让当前角色已有的权限默认选中
     var auth_ids_list = "{$roleData['auth_ids_list']}";
     var ids_arr = auth_ids_list.split(',');
+    //alert(ids_arr);
     $("input[type='checkbox']").val(ids_arr);
     //权限全选和全不选
     function select_all(ele){

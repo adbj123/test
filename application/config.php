@@ -13,6 +13,19 @@ return [
     // +----------------------------------------------------------------------
     // | 应用设置
     // +----------------------------------------------------------------------
+    //发货状态
+    'send_status'=>[
+        0 => '<span style="color:red">未发货</span>',
+        1 => '<span style="color:green">已发货</span>',
+        2 => '<span style="color:blue">已收货</span>',
+        3 => '<span style="color:pink">退货中</span>',
+        4 => '<span style="color:#12a123">退货完成</span>',
+    ],
+    //付款（订单）状态
+    'pay_status'=>[
+        0 => '<span style="color:red">未付款</span>',
+        1 => '<span style="color:green">已付款</span>',
+    ],
     // 是否显示导航栏
     'is_show'=>[
         0=>'<span style="color:#666">不显示</span>',
@@ -47,6 +60,7 @@ return [
     'static_home'           =>'/static/home',
     //为密码代言
     'password_salt'         =>'A^&*%#Hcasj',
+    'sms_salt'         =>     '*&Ggujf$#',
     // 应用调试模式
     'app_debug'              => true,
     // 应用Trace
@@ -126,7 +140,7 @@ return [
     // 路由配置文件（支持配置多个）
     'route_config_file'      => ['route'],
     // 是否强制使用路由
-    'url_route_must'         => false,
+    'url_route_must'         => true,
     // 域名部署
     'url_domain_deploy'      => false,
     // 域名根，如thinkphp.cn

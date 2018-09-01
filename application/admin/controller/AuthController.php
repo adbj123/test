@@ -17,7 +17,7 @@
                 }
                 $authModel = new Auth();
                 if($authModel->save($postData)){
-                    $this->success("添加成功",url("/admin/auth/index"));
+                    $this->success("添加成功",url("/admin/auth/add"));
                 }else{
                     $this->error("添加失败");
                 }
@@ -68,6 +68,15 @@
             $auths = $authModel->getSonsAuth($oldauths);
             return $this->fetch('',
                 ['authData'=>$authData,'auths'=>$auths]);
+        }
+        public function del(){
+            $auth_id = input('auth_id');
+            if(Auth::destroy($auth_id)){
+                $this->success('删除成功',url('/admin/auth/index'));
+            }else{
+                $this->error('删除失败');
+            }
+
         }
     }
 ?>
